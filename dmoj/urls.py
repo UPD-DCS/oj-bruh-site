@@ -33,6 +33,15 @@ register_patterns = [
     # Let's use <str:activation_key>, because a bad activation key should still get to the view;
     # that way, it can return a sensible "invalid key" message instead of a confusing 404.
     path('activate/<str:activation_key>/', ActivationView.as_view(), name='registration_activate'),
+    # path('register/', RegistrationView.as_view(), name='registration_register'),
+    # path('register/complete/',
+         # TitledTemplateView.as_view(template_name='registration/registration_complete.html',
+                                    # title=_('Registration Completed')),
+         # name='registration_complete'),
+    # path('register/closed/',
+         # TitledTemplateView.as_view(template_name='registration/registration_closed.html',
+                                    # title=_('Registration Not Allowed')),
+         # name='registration_disallowed'),
     path('login/', user.CustomLoginView.as_view(), name='auth_login'),
     path('logout/', user.UserLogoutView.as_view(), name='auth_logout'),
     path('password/change/', user.CustomPasswordChangeView.as_view(), name='password_change'),
@@ -169,16 +178,16 @@ urlpatterns = [
         path('/', lambda _, user: HttpResponsePermanentRedirect(reverse('user_page', args=[user]))),
     ])),
 
-    path('comments/upvote/', comment.upvote_comment, name='comment_upvote'),
-    path('comments/downvote/', comment.downvote_comment, name='comment_downvote'),
-    path('comments/hide/', comment.comment_hide, name='comment_hide'),
-    path('comments/<int:id>/', include([
-        path('edit', comment.CommentEdit.as_view(), name='comment_edit'),
-        path('history/ajax', comment.CommentRevisionAjax.as_view(), name='comment_revision_ajax'),
-        path('edit/ajax', comment.CommentEditAjax.as_view(), name='comment_edit_ajax'),
-        path('votes/ajax', comment.CommentVotesAjax.as_view(), name='comment_votes_ajax'),
-        path('render', comment.CommentContent.as_view(), name='comment_content'),
-    ])),
+    # path('comments/upvote/', comment.upvote_comment, name='comment_upvote'),
+    # path('comments/downvote/', comment.downvote_comment, name='comment_downvote'),
+    # path('comments/hide/', comment.comment_hide, name='comment_hide'),
+    # path('comments/<int:id>/', include([
+        # path('edit', comment.CommentEdit.as_view(), name='comment_edit'),
+        # path('history/ajax', comment.CommentRevisionAjax.as_view(), name='comment_revision_ajax'),
+        # path('edit/ajax', comment.CommentEditAjax.as_view(), name='comment_edit_ajax'),
+        # path('votes/ajax', comment.CommentVotesAjax.as_view(), name='comment_votes_ajax'),
+        # path('render', comment.CommentContent.as_view(), name='comment_content'),
+    # ])),
 
     path('contests/', paged_list_view(contests.ContestList, 'contest_list')),
     path('contests.ics', contests.ContestICal.as_view(), name='contest_ical'),
