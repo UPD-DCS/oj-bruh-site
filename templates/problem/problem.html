@@ -45,8 +45,6 @@
 {% endblock %}
 
 {% block content_js_media %}
-    {% include "comments/media-js.html" %}
-
     {% if vote_perm.can_view() %}
         <script src="{{ static('libs/chart.js/Chart.js') }}" type="text/javascript"></script>
         <script src="{{ static('problem-vote.js') }}" type="text/javascript"></script>
@@ -342,8 +340,6 @@
                 <p class="no-comments-message">{{ _('No clarifications have been made at this time.') }}</p>
             {% endif %}
         </div>
-    {% elif enable_comments and False %}
-        {% include "comments/list.html" %}
     {% endif %}
 {% endblock %}
 
